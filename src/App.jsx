@@ -15,6 +15,7 @@ function App() {
   // 7. 데이터를 들고 오는 동안 로딩
   
   const [weather, setWeather] = useState(null);
+  const cities = ['Praha','Budapest','Seoul'];
 
   const getCurrentLocation = () => {
     navigator.geolocation.getCurrentPosition((position) => {
@@ -44,7 +45,7 @@ function App() {
       <div className="container">
 
         <WeatherBox weather={weather}/>
-        <WeatherButton />
+        <WeatherButton cities={cities}/>
       </div>
 
   );
