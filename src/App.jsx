@@ -18,6 +18,7 @@ function App() {
   const [cityInput, setCityInput] = useState("");
   const [loading, setLoading] = useState(false);
   const [weather, setWeather] = useState(null);
+  const [pollution, setPollution] = useState(null);
   const [city, setCity] = useState(null);
   const cities = ["Praha", "Budapest", "Seoul"];
   const [error, setError] = useState(false);
@@ -31,6 +32,7 @@ function App() {
     navigator.geolocation.getCurrentPosition((position) => {
       const { latitude, longitude } = position.coords;
       getWeatherByCurrentLocation(latitude, longitude);
+      getPollutionByCurrentLocation(latitude, longitude);
     });
   };
 
@@ -65,6 +67,20 @@ function App() {
     }
   };
 
+  const getPollutionByCurrentLocation = async (lat, lon) => {
+    try {
+      let url = `http://api.openweathermap.org/data/2.5/air_pollution?lat=${lat}&lon=${lon}&appid=${API_KEY}&units=metric`;
+      let res = await fetch(url);
+      let data = await res.json();
+      console.log("polu",data);
+      setPollution(data);
+      setLoading(false);
+    } catch (err) {
+      setAPIError(err.message);
+      setLoading(false);
+    }
+  };
+
   useEffect(() => {
     if (city == null) {
       setLoading(true);
@@ -77,7 +93,7 @@ function App() {
   }, [city]);
 
   const handleCityChange = (city) => {
-    if( city === "current") {
+    if (city === "current") {
       setCity(null);
     } else {
       setCity(city);
@@ -93,15 +109,17 @@ function App() {
       ) : (
         <div className="weather-shell">
           <div className="content">
-            <WeatherSideInfo weather={weather} />
+            <WeatherSideInfo weather={weather} setCity={setCity} />
 
             <main className="main">
               <div className="btn">
-                <WeatherButton cities={cities} 
-                handleCityChange={handleCityChange}
-                setCity={setCity} />
+                <WeatherButton
+                  cities={cities}
+                  handleCityChange={handleCityChange}
+                  setCity={setCity}
+                />
               </div>
-              <WeatherBox weather={weather} />
+              <WeatherBox weather={weather} pollution={pollution} />
             </main>
           </div>
         </div>

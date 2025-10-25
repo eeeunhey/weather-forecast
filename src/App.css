@@ -8,13 +8,18 @@ body {
   min-height: 100vh;
   background: url("/img/cloude3.jpg") center/cover no-repeat;
   display: grid;
-  place-items: center; /* 화면 가운데로 */
+  place-items: center;
+}
+.icon {
+  width: 24px;
+  height: 24px;
+  display: flex;
 }
 
 .weather-shell {
   width: clamp(380px, 90vw, 1200px);
   height: clamp(500px, 80vh, 800px);
-  background: rgba(255, 255, 255, 0.15);
+  background: rgba(150, 150, 150, 0.15);
   backdrop-filter: blur(5px);
   border: 1px solid rgba(255, 255, 255, 0.3);
   border-radius: 20px;
@@ -22,9 +27,39 @@ body {
   display: flex;
   gap: 16px;
   flex-direction: column;
+  padding: clamp(12px, 2vw, 20px);
 }
 
-/* 3) 상단: 검색줄 */
+.weather-info {
+  justify-items: center;
+  align-content: center;
+  display: flex;
+  justify-items: center;
+  gap: 8px;
+  color: #fff;
+  text-shadow: 0 0 1px rgba(255, 255, 255, 0.9), 0 1px 8px rgba(0, 0, 0, 0.45);
+}
+
+.weather-icon {
+  width: clamp(130px, 33vw, 200px);
+  height: clamp(130px, 33vw, 200px);
+  opacity: 0.62;
+
+  filter: brightness(0.89) contrast(1.05) saturate(1.1) blur(0.3px)
+    drop-shadow(0 2px 4px rgba(255, 255, 255, 1.9))
+    drop-shadow(0 2px 8px rgba(0, 0, 0, 0.07));
+
+  transition: all 0.3s ease;
+}
+
+.weather-info div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 45px;
+  margin-left: 10px;
+}
+
 .search {
   display: flex;
   justify-content: flex-end;
@@ -49,28 +84,37 @@ body {
 } */
 
 .side {
-  background: rgba(245, 245, 245, 0.4);
-  backdrop-filter: blur(12px);
+  background: rgba(255, 255, 255, 0.45);
+  backdrop-filter: blur(20px) saturate(160%);
   border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  border-radius: 20px;
   border-radius: 16px;
   color: #fff;
   padding: 12px;
-  overflow: hidden;
+
+  text-shadow: 0 0 1px rgba(255, 255, 255, 0.4), 0 1px 4px rgba(0, 0, 0, 0.45);
 }
 
-.side p {
-  color: #666;
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
 }
 
 .main {
+
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 20px;
   height: 100%;
-  flex: 1 10 auto;
   min-width: 0;
   background: rgba(245, 245, 245, 0.4);
   backdrop-filter: blur(12px);
   border: 1px solid rgba(255, 255, 255, 0.2);
   border-radius: 16px;
-  color: #666;
+  color: #fff;
   padding: 12px;
   display: grid;
   place-items: center;
@@ -80,6 +124,17 @@ body {
   display: flex;
   gap: 20px;
   overflow-x: auto;
+}
+
+.time-text {
+  font-size: 15px;
+  font-weight: 500;
+    color: #fff;
+
+  letter-spacing: 0.5px;
+
+  margin-top: 15px;
+  margin-bottom: 16px;
 }
 
 .spinner-box {
@@ -104,16 +159,23 @@ body {
   }
 }
 
-.content {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
+.aqi-good { color: #4ade80; }     /* 연초록 */
+.aqi-fair { color: #facc15; }     /* 밝은 노랑 */
+.aqi-moderate { color: #f59e0b; } /* 주황빛 */
+.aqi-poor { color: #ef4444; }     /* 붉은빛 */
+.aqi-verypoor { color: #7c3aed; } /* 보라톤 */
+.aqi-unknown { color: #ccc; }
+
+
+@media (max-width:560px){
+  .aq-pills{ grid-template-columns: 1fr; }
 }
 
 @media (min-width: 900px) {
   .weather-shell {
     display: grid;
     gap: 20px;
+    
   }
 
   .content {
@@ -123,13 +185,14 @@ body {
   }
 
   .side {
-    flex: 0 0 clamp(420px, 26vw, 360px);
+    flex: 0 0 clamp(360px, 26vw, 360px);
     height: 100%;
     margin-right: 8px;
   }
 
   .main {
-    flex: 1 1 auto; /* 남은 공간 다 차지 */
-    height: 100%;
+    height: auto;
+    width: auto;
+    flex: auto;
   }
 }
