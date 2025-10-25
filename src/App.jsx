@@ -2,8 +2,7 @@ import { useEffect, useState } from "react";
 import "./App.css";
 import WeatherBox from "./component/WeatherBox";
 import WeatherButton from "./component/WeatherButton";
-import WeatherSideInfo from "./component/WeatherSideInfo";
-import SpinnerLoader from "./component/SpinnerLoader";
+
 
 function App() {
   // 할일 정리하기
@@ -14,99 +13,41 @@ function App() {
   // 5. 도시버튼을 클릭하면 도시별 날씨가 보인다
   // 6. 현재 버튼 위치 버튼을 누르면 다시 현재 위치 기반의 날씨가 나온다
   // 7. 데이터를 들고 오는 동안 로딩
-  const API_KEY = import.meta.env.VITE_API_KEY;
-  const [cityInput, setCityInput] = useState("");
-  const [loading, setLoading] = useState(false);
+  
   const [weather, setWeather] = useState(null);
-  const [city, setCity] = useState(null);
-  const cities = ["Praha", "Budapest", "Seoul"];
-  const [error, setError] = useState(false);
-  const [apiError, setAPIError] = useState("");
-
-  // 위 경도 위도 가지고 지역을 반환 하는 함수
-
-  //경로 위도 정보 가지는 함수
+  const cities = ['Praha','Budapest','Seoul'];
 
   const getCurrentLocation = () => {
     navigator.geolocation.getCurrentPosition((position) => {
-      const { latitude, longitude } = position.coords;
-      getWeatherByCurrentLocation(latitude, longitude);
+      let lat = position.coords.latitude;
+      let lon = position.coords.longitude;
+      //console.log(lat,lon)
+      getWeatherByCurrentLocation(lat, lon);
     });
-  };
 
-  const getWeatherByCurrentLocation = async (lat, lon) => {
-    try {
-      let url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${API_KEY}&units=metric`;
+    const getWeatherByCurrentLocation = async (lat, lon) => {
+      let url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=60ad6a3b88cbca2c0c9f2fe0e8be2bc7&units=metric`;
       let response = await fetch(url);
       let data = await response.json();
       setWeather(data);
-      setLoading(false);
-      //console.log("weather info ",data);
-    } catch (err) {
-      setAPIError(err.message);
-      setLoading(false);
-    }
-  };
+      //console.log(data);
+    };
 
-  // 지역명에 해당하는 날씨 정보를 반환하는 녀석
-  const getWeatherByCity = async () => {
-    try {
-      let url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${API_KEY}&units=metric`;
-      let response = await fetch(url);
-      let data = await response.json();
-      //setCity(data);
-      console.log("city", data);
-      setWeather(data);
-      setLoading(false);
-    } catch (err) {
-      console.log(err);
-      setAPIError(err.message);
-      setLoading(false);
-    }
+    //console.log(getCurrentLocation);
   };
 
   useEffect(() => {
-    if (city == null) {
-      setLoading(true);
-      getCurrentLocation();
-    } else {
-      setLoading(true);
-      getWeatherByCity();
-    }
-    // console.log("city",city);
-  }, [city]);
-
-  const handleCityChange = (city) => {
-    if( city === "current") {
-      setCity(null);
-    } else {
-      setCity(city);
-    }
-  };
+    getCurrentLocation();
+  }, []);
 
   return (
-    <>
-      {loading ? (
-        <SpinnerLoader />
-      ) : apiError ? (
-        <div className="error">{apiError}</div>
-      ) : (
-        <div className="weather-shell">
-          <div className="content">
-            <WeatherSideInfo weather={weather} />
 
-            <main className="main">
-              <div className="btn">
-                <WeatherButton cities={cities} 
-                handleCityChange={handleCityChange}
-                setCity={setCity} />
-              </div>
-              <WeatherBox weather={weather} />
-            </main>
-          </div>
-        </div>
-      )}
-    </>
+      <div className="container">
+
+        <WeatherBox weather={weather}/>
+        <WeatherButton cities={cities}/>
+      </div>
+
   );
 }
 
