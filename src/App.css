@@ -1,52 +1,135 @@
-@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap");
-
 * {
+  box-sizing: border-box;
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
-  font-family: "Noto Sans KR", sans-serif;
 }
-
 body {
-  background: url("/img/cloude3.jpg");
-  height: 100dvh;
-  background-size: cover;
-  background-position: center;
+  font-family: "Noto Sans KR", sans-serif;
+  min-height: 100vh;
+  background: url("/img/cloude3.jpg") center/cover no-repeat;
+  display: grid;
+  place-items: center; /* 화면 가운데로 */
 }
 
-.container {
+.weather-shell {
+  width: clamp(380px, 90vw, 1200px);
+  height: clamp(500px, 80vh, 800px);
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(5px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 20px;
+  padding: 20px;
   display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
+  gap: 16px;
   flex-direction: column;
 }
 
-.weather-box {
-  width: clamp(380px, 50vw, 1200px);
-  height: clamp(500px, 80vh, 800px);
-  background: rgba(255, 255, 255, 0.15);
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  border-radius: 20px;
-  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.25);
-  padding: 50px;
+/* 3) 상단: 검색줄 */
+.search {
+  display: flex;
+  justify-content: flex-end;
 }
-
 .city-input {
   width: 100%;
+  max-width: 880px;
   padding: 10px 16px;
-  border-radius: 90px;
-  border: 3px solid transparent;
-  background: rgba(255, 255, 255, 0.18);
+  border-radius: 999px;
   border: 1px solid rgba(255, 255, 255, 0.3);
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2),
-    inset 0 1px 1px rgba(255, 255, 255, 0.3);
+  background: rgba(255, 255, 255, 0.2);
+  color: #222;
   font-weight: 500;
-  transition: 0.25s border;
 }
 
+/* .content {
+  flex: 1;
+  display: flex;
+  align-items: stretch;
+  flex-direction: column;
+  gap: 16px;
+} */
 
-.city-input::placeholder {
-  color: rgb(70, 70, 70, 0.85);
+.side {
+  background: rgba(245, 245, 245, 0.4);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 16px;
+  color: #fff;
+  padding: 12px;
+  overflow: hidden;
+}
+
+.side p {
+  color: #666;
+}
+
+.main {
+  height: 100%;
+  flex: 1 10 auto;
+  min-width: 0;
+  background: rgba(245, 245, 245, 0.4);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 16px;
+  color: #666;
+  padding: 12px;
+  display: grid;
+  place-items: center;
+}
+
+.btn {
+  display: flex;
+  gap: 20px;
+  overflow-x: auto;
+}
+
+.spinner-box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.spinner {
+  width: 60px;
+  height: 60px;
+  animation: spin 1s linear infinite;
+}
+
+/* 회전 애니메이션 */
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+@media (min-width: 900px) {
+  .weather-shell {
+    display: grid;
+    gap: 20px;
+  }
+
+  .content {
+    flex-direction: row;
+    gap: 10px;
+    padding: 0;
+  }
+
+  .side {
+    flex: 0 0 clamp(420px, 26vw, 360px);
+    height: 100%;
+    margin-right: 8px;
+  }
+
+  .main {
+    flex: 1 1 auto; /* 남은 공간 다 차지 */
+    height: 100%;
+  }
 }
