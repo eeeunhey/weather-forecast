@@ -77,7 +77,7 @@ function App() {
   }, [city]);
 
   const handleCityChange = (city) => {
-    if( city === "current") {
+    if (city === "current") {
       setCity(null);
     } else {
       setCity(city);
@@ -87,7 +87,11 @@ function App() {
   return (
     <>
       {loading ? (
-        <SpinnerLoader />
+        <div className="weather-shell">
+          <div className="main">
+            <SpinnerLoader />
+          </div>
+        </div>
       ) : apiError ? (
         <div className="error">{apiError}</div>
       ) : (
@@ -97,9 +101,11 @@ function App() {
 
             <main className="main">
               <div className="btn">
-                <WeatherButton cities={cities} 
-                handleCityChange={handleCityChange}
-                setCity={setCity} />
+                <WeatherButton
+                  cities={cities}
+                  handleCityChange={handleCityChange}
+                  setCity={setCity}
+                />
               </div>
               <WeatherBox weather={weather} />
             </main>
