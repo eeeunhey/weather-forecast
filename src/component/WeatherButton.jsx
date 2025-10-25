@@ -1,20 +1,35 @@
+import { Button } from "@mui/material";
 
-import { Button } from "@mui/material"
+const WeatherButton = ({ cities, setCity, handleCityChange }) => {
+  console.log(cities);
 
-const WeatherButton = ({cities}) => {
-  console.log(cities)
   return (
     <div>
-        <Button variant="contained" >Current Location</Button>
-        {/* <Button variant="contained">Praha</Button>
+      <Button
+
+        sx={{
+          color: setCity === null ? "#ED8554" : "#666"
+        }}
+        onClick={() => handleCityChange("current")}
+      >
+        Current Location
+      </Button>
+      {/* <Button variant="contained">Praha</Button>
         <Button variant="contained">Budapest </Button>
         <Button variant="contained">Seoul </Button> */}
 
-        {cities.map((item)=> (
-            <Button variant="contained">{item}</Button>
-        ))}
-    </div>
-  )
-}
+      {cities.map((city) => (
+        <Button
 
-export default WeatherButton
+          sx={{ color: "#666" }}
+          key={city}
+          onClick={() => setCity(city)}
+        >
+          {city}
+        </Button>
+      ))}
+    </div>
+  );
+};
+
+export default WeatherButton;
