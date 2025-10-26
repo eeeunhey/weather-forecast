@@ -18,7 +18,6 @@ const WeatherBox = ({ weather, pollution }) => {
     className = "aqi-fair";
   } else if (aqi === 3) {
     label = "약간 나쁨 😕";
-    emoji = "🌫";
     className = "aqi-moderate";
   } else if (aqi === 4) {
     label = "나쁨 😷";

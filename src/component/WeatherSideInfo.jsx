@@ -89,8 +89,8 @@ const WeatherSideInfo = ({ weather }) => {
 
             <img src="/img/icon/windy.svg" className="icon" />
             <p>체감 온도: {weather?.main.feels_like}°C</p>
-            <img src="/img/icon/windy.svg" className="icon" />
-            <p>기압: {weather?.main.pressure} hPa</p>
+            {/* <img src="/img/icon/windy.svg" className="icon" /> */}
+            {/* <p>기압: {weather?.main.pressure} hPa</p> */}
           </div>
         </div>
       </div>
