@@ -69,7 +69,7 @@ function App() {
 
   const getPollutionByCurrentLocation = async (lat, lon) => {
     try {
-      let url = `http://api.openweathermap.org/data/2.5/air_pollution?lat=${lat}&lon=${lon}&appid=${API_KEY}&units=metric`;
+      let url = `https://api.openweathermap.org/data/2.5/air_pollution?lat=${lat}&lon=${lon}&appid=${API_KEY}&units=metric`;
       let res = await fetch(url);
       let data = await res.json();
       console.log("polu",data);
