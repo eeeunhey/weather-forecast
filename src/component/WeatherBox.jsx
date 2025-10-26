@@ -28,11 +28,50 @@ const WeatherBox = ({ weather, pollution }) => {
     className = "aqi-verypoor";
   }
   return (
-    <div>
-      <div className="">
-        <div> Wind Status</div>
-        {/* <img className="weather-icon" src={iconUrl} alt={weather?.weather[0].description} /> */}
+    <div className="cards">
+      <div className="card">
+        <div className="title">Humidity</div>
+        <div className="value">{weather?.main?.humidity}%</div>
+      </div>
+
+      <div className="card">
+        <div className="title">Wind Status</div>
+        <div className="value">
+          {(weather?.wind?.speed * 3.6).toFixed(2)} km/h
+        </div>
+        <div className="sub">{weather?.name}</div>
+      </div>
+
+      <div className="card">
+        <div className="title">{weather?.name}</div>
+        <div className="value">
+          {Math.round(weather?.main?.temp)}°C /{" "}
+          {Math.round(weather?.main?.temp * 1.8 + 32)}
+          °F
+        </div>
+        <div className="sub">{weather?.weather?.[0]?.description}</div>
+      </div>
+
+      <div className="card">
+        <div className="title">Air Quality</div>
+        <div className="aq-info">
+          <h2 className={className}> 미세먼지 {label}</h2>
+          {/* <p className="aq-sub">AQI {aqi}</p> */}
+        </div>
+      </div>
+
+      {/* <div className="weather-cards">
         <div>{weather?.name}</div>
+        <h2>
+          {weather?.main.temp} C / {Math.round(weather?.main.temp * 1.8 + 32)}{" "}
+          °F
+        </h2>
+        <h3>{weather?.weather[0].description}</h3>
+      </div> */}
+
+      {/* <div className="weather-cards">
+        {/* <img className="weather-icon" src={iconUrl} alt={weather?.weather[0].description} /> */}
+        {/* <div>{weather?.name}</div>
         <h2>
           {weather?.main.temp} C / {Math.round(weather?.main.temp * 1.8 + 32)}{" "}
           °F
@@ -44,12 +83,12 @@ const WeatherBox = ({ weather, pollution }) => {
           {/* <h3>{pollution?.list[0]?.main?.aqi}</h3> */}
           {/* <h3>{pollution?.main?.aqi}</h3> */}
 
-          <div className="aq-info">
+          {/* <div className="aq-info">
             <h2 className={className}> 미세먼지 {label}</h2>
             {/* <p className="aq-sub">AQI {aqi}</p> */}
-          </div>
-        </div>
-      </div>
+          {/* </div> */}
+      {/* //   </div> */} 
+
     </div>
   );
 };

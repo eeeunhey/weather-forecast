@@ -8,7 +8,7 @@ const WeatherButton = ({ cities, setCity, handleCityChange }) => {
       <Button
 
         sx={{
-          color: setCity === null ? "#ED8554" : "#fff"
+          color: setCity === null ? "#ED8554" : "#666"
         }}
         onClick={() => handleCityChange("current")}
       >
@@ -21,7 +21,7 @@ const WeatherButton = ({ cities, setCity, handleCityChange }) => {
       {cities.map((city) => (
         <Button
 
-          sx={{ color: "#fff" }}
+          sx={{ color: "#666" }}
           key={city}
           onClick={() => setCity(city)}
         >

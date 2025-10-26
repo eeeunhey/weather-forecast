@@ -11,12 +11,11 @@ const WeatherSideInfo = ({ weather }) => {
     "03n": "/weatherImg/03d.svg",
     "03d": "/weatherImg/03d.svg",
     "04n": "/weatherImg/03d.svg",
-    "04d": "/weatherImg/03d.svg",
+    "04d": "/weatherImg/04d.svg",
     "09d": "/weatherImg/09d.svg",
     "10d": "/weatherImg/10d.svg",
     "11d": "/weatherImg/11d.svg",
     "11n": "/weatherImg/11n.svg",
-
     "13d": "/weatherImg/13d.svg",
     "13n": "/weatherImg/13n.svg",
     "50d": "/weatherImg/50d.svg",
@@ -81,16 +80,16 @@ const WeatherSideInfo = ({ weather }) => {
         <div>
           <div className="weather-info">
 
-              <img src="/img/windy.svg" className="icon" />
+              <img src="/img/icon/windy.svg" className="icon" />
               <p>습도: {weather?.main.humidity}%</p>
 
 
-              <img src="/img/windy.svg" className="icon" />
+              <img src="/img/icon/windy.svg" className="icon" />
               <p>풍속: {weather?.wind.speed} m/s</p>
 
-            <img src="/img/windy.svg" className="icon" />
-            <p>체감: {weather?.main.feels_like}°C</p>
-            <img src="/img/windy.svg" className="icon" />
+            <img src="/img/icon/windy.svg" className="icon" />
+            <p>체감 온도: {weather?.main.feels_like}°C</p>
+            <img src="/img/icon/windy.svg" className="icon" />
             <p>기압: {weather?.main.pressure} hPa</p>
           </div>
         </div>
