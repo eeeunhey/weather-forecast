@@ -52,7 +52,7 @@ const WeatherBox = ({ weather, pollution }) => {
       </div>
 
       <div className="card">
-        <div className="title">Air Quality</div>
+        <div className="title">Air Quality.</div>
         <div className="aq-info">
           <h2 className={className}> 미세먼지 {label}</h2>
           {/* <p className="aq-sub">AQI {aqi}</p> */}
